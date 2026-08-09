@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片像素颜色提取工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>图片像素颜色提取工具</h1>
+            <p class="subtitle">智能分组导出，使用黑科技异步处理，UI界面简洁易用。</p>
+        </header>
+
+        <main>
+            <section class="upload-preview-section">
+                <div class="upload-preview-area" id="dropZone">
+                    <div class="upload-content" id="uploadContent">
+                        <div class="upload-icon">📁</div>
+                        <p>拖拽图片到此处或点击选择</p>
+                        <span class="hint">支持 JP(E)G, PNG, HEIC/F 等格式</span>
+                    </div>
+                    <img id="previewImage" alt="预览图" class="preview-image" hidden>
+                    <button class="change-image-btn" id="changeImageBtn" hidden>更换图片</button>
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                </div>
+                <div class="file-info" id="fileInfo"></div>
+            </section>
+
+            <section class="options-section">
+                <div class="settings-grid">
+                    <div class="setting-item" id="toleranceItem">
+                        <span class="setting-label">容值档位</span>
+                        <input type="range" id="toleranceSlider" min="0" max="50" value="12" step="1" class="setting-slider">
+                        <span id="toleranceLabel" class="setting-value">细致(12)</span>
+                    </div>
+
+                    <div class="setting-item animation-on" id="animationItem">
+                        <span class="setting-label">动画效果</span>
+                        <button id="toggleAnimation" class="btn-toggle active">开启</button>
+                    </div>
+
+                    <div class="setting-item action-buttons" id="actionItem">
+                        <div class="action-btn-group">
+                            <button id="extractBtn" class="btn btn-primary">开始提取</button>
+                            <button id="stopBtn" class="btn btn-danger" disabled>停止</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="progress-section" id="progressSection" hidden>
+                <div class="progress-stages">
+                    <div class="stage stage-1 active">
+                        <span class="stage-label">1. 提取颜色</span>
+                        <div class="stage-progress">
+                            <div class="stage-bar" id="stage1Bar"></div>
+                        </div>
+                    </div>
+                    <div class="stage stage-2">
+                        <span class="stage-label">2. 分组分类</span>
+                        <div class="stage-progress">
+                            <div class="stage-bar" id="stage2Bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="progress-text" id="progressText">准备中...</p>
+            </section>
+            <section class="stats-section" id="statsSection" hidden>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">统计像素数</span>
+                        <span class="stat-value" id="totalPixels">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">原始颜色数</span>
+                        <span class="stat-value" id="originalColors">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">分组后组数</span>
+                        <span class="stat-value" id="groupedColors">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">耗时</span>
+                        <span class="stat-value" id="elapsedTime">-</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="results-section" id="resultsSection" hidden>
+                <div class="results-header">
+                    <h3>提取结果</h3>
+                    <div class="export-buttons">
+                        <select id="exportFormat" class="format-select">
+                            <option value="txt">文本格式 (.txt)</option>
+                            <option value="json">JSON格式 (.json)</option>
+                            <option value="csv">CSV格式 (.csv)</option>
+                            <option value="css">CSS格式 (.css)</option>
+                        </select>
+                        <button id="exportBtn" class="btn btn-secondary">导出结果</button>
+                    </div>
+                </div>
+
+                <div class="color-grid" id="colorGrid"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
