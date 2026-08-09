@@ -640,22 +640,6 @@ class ColorExtractor {
             filename = `colors_${timestamp}.txt`;
             mimeType = 'text/plain;charset=utf-8';
 
-        } else if (format === 'css') {
-            content = `/* 颜色调色板 */\n/* 导出时间: ${new Date().toLocaleString()} */\n\n`;
-            content += `:root {\n`;
-
-            let dataSource = this.groupedData
-                ? Object.entries(this.groupedData).sort((a, b) => b[1].count - a[1].count)
-                : Object.entries(this.colorData).sort((a, b) => b[1] - a[1]);
-
-            dataSource.forEach(([color, info], idx) => {
-                const varName = `--color-${idx + 1}`;
-                content += `  ${varName}: ${color}; /* ${(info.count || info).toLocaleString()}px */\n`;
-            });
-
-            content += `}\n`;
-            filename = `colors_${timestamp}.css`;
-            mimeType = 'text/css';
         }
 
         const blob = new Blob([content], { type: mimeType });
