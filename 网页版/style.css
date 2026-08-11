@@ -89,12 +89,33 @@ header h1 {
     z-index: 1;
 }
 
+.link {
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+    padding: 4px 0;
+    margin: 3px 0;
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.link:hover {
+    color: #fff;
+    border-bottom-color: rgba(255, 255, 255, 0.7);
+    padding-left: 4px;
+}
+
 .subtitle {
     font-size: 16px;
     opacity: 0.9;
     font-weight: 300;
     position: relative;
     z-index: 1;
+    margin-top: 8px;
 }
 
 main {
